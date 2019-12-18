@@ -9,6 +9,7 @@
 
 - Add title to texts
 - Generating outline from text (do it clientside with JSON? after submit button once)
+- Add questions which asks users to reorganize their notes and provide highlevel explanations
 
 # Works Cited
 

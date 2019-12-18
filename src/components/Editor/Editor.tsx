@@ -2,6 +2,8 @@ import ReactQuill from "react-quill";
 import React, { Component } from "react";
 import "react-quill/dist/quill.snow.css";
 import OutlineInfo from "./OutlineInfo";
+import Button from "react-bootstrap/Button";
+import Outline from "./Outline";
 
 interface IState {
   text: string;
@@ -16,14 +18,21 @@ class Editor extends Component<{}, IState> {
 
   handleChange(value: string) {
     this.setState({ text: value });
-    console.log(this.state.text);
   }
+
+  handleSubmit() {}
 
   public render() {
     return (
       <div>
         <OutlineInfo />
-        <ReactQuill value={this.state.text} onChange={this.handleChange} />
+        <form onSubmit={this.handleSubmit}>
+          <ReactQuill value={this.state.text} onChange={this.handleChange} />
+          <Button variant="dark" type="submit" size="sm">
+            Submit
+          </Button>
+        </form>
+        <Outline outline={this.state.text} />
       </div>
     );
   }

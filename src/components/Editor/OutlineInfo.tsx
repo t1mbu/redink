@@ -30,45 +30,35 @@ const OutlineInfo: React.FC = () => {
               <Card>
                 <Card.Header>Notes</Card.Header>
                 <Card.Body>
-                  <Card.Text>
-                    <h2>Animals</h2>
-                    <h3>Fish</h3>
-                    <p>
-                      Fish are <b>ectothermic</b> meaning they're coldblooded.
-                    </p>
-                    <h3>Mammals</h3>
-                    <p>
-                      Mammals are <b>intelligent</b>. Many were{" "}
-                      <b>domesticated</b> by humans.
-                    </p>
-                  </Card.Text>
+                  <h2>Animals</h2>
+                  <h3>Fish</h3>
+                  <p>
+                    Fish are <b>ectothermic</b> meaning they're coldblooded.
+                  </p>
+                  <h3>Mammals</h3>
+                  <p>
+                    Mammals are <b>intelligent</b>. Many were{" "}
+                    <b>domesticated</b> by humans.
+                  </p>
                 </Card.Body>
               </Card>
               <Card>
                 <Card.Header>Outline</Card.Header>
                 <Card.Body>
-                  <Card.Text>
+                  <ul>
+                    <li>Animals</li>
                     <ul>
-                      <li>
-                        Animals
-                        <ul>
-                          <li>
-                            Fish
-                            <ul>
-                              <li>ectothermic</li>
-                            </ul>
-                          </li>
-                          <li>
-                            Mammals
-                            <ul>
-                              <li>intelligent</li>
-                              <li>ectothermic</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
+                      <li>Fish</li>
+                      <ul>
+                        <li>ectothermic</li>
+                      </ul>
+                      <li>Mammals</li>
+                      <ul>
+                        <li>intelligent</li>
+                        <li>domesticated</li>
+                      </ul>
                     </ul>
-                  </Card.Text>
+                  </ul>
                 </Card.Body>
               </Card>
             </CardGroup>
