@@ -12,8 +12,9 @@ const OutlineInfo: React.FC = () => {
   return (
     <div>
       <Container>
-        <b>Turning notes to outlines:</b> Non-normal text sizes are treated as
-        section titles. Bolded, normal words are interpreted as important vocab.
+        <b>Notes to outlines:</b> If you use headings on any note lines, they'll
+        be treated as section titles. Any normal text font will be ignored
+        except for bold words.
       </Container>
       <Container>
         <Button

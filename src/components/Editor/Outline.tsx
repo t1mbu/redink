@@ -24,31 +24,33 @@ class Outline extends Component<IProps> {
     let prev = -1;
     let items = Array();
     for (let i = 0; i < 4; i++) {
-      items.push([]);
+      items.push([]); // Unsure of how to initialise array without whining about never/undefined
     }
 
-    console.log(ds);
     for (const [data, level] of ds) {
       if (level <= prev + 1) {
-        items[level].push(<Bullet outline={data} />);
         if (level < prev) {
-          for (let i = prev; prev !== level; i--) {
+          for (let i = prev; i > level; i--) {
             items[i - 1].push(<List outline={items[i]} />);
             items[i] = [];
           }
         }
-        console.log("Items 1: " + items);
+        // In order to preserve list order, new bullets are pushed after restructuring of old ones
+        items[level].push(<Bullet outline={data} />);
       }
       prev = level;
     }
-    console.log("Items 2: " + items);
+
+    for (let i = o.maxLevel; i > 0; i--) {
+      items[i - 1].push(<List outline={items[i]} />); // Don't forget about ending DOM structure
+    }
 
     return (
       <div>
         {items.length && items[0].length ? (
           <List outline={items[0]} />
         ) : (
-          <p>Sorry, no outline available.</p>
+          <p>No preview available.</p>
         )}
       </div>
     );

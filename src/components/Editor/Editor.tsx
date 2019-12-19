@@ -4,15 +4,18 @@ import "react-quill/dist/quill.snow.css";
 import OutlineInfo from "./OutlineInfo";
 import Button from "react-bootstrap/Button";
 import Outline from "./Outline";
+import Container from "react-bootstrap/Container";
+import TextField from "@material-ui/core/TextField";
 
 interface IState {
+  title: string;
   text: string;
 }
 
 class Editor extends Component<{}, IState> {
   constructor(props: {}) {
     super(props);
-    this.state = { text: "" };
+    this.state = { title: "", text: "" };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -26,13 +29,26 @@ class Editor extends Component<{}, IState> {
     return (
       <div>
         <OutlineInfo />
-        <form onSubmit={this.handleSubmit}>
-          <ReactQuill value={this.state.text} onChange={this.handleChange} />
-          <Button variant="dark" type="submit" size="sm">
-            Submit
-          </Button>
-        </form>
-        <Outline outline={this.state.text} />
+        <br />
+        <Container>
+          <TextField
+            id="outlined-basic"
+            label="title"
+            onChange={e => {
+              this.setState({ title: e.target.value });
+            }}
+          />
+          <form onSubmit={this.handleSubmit}>
+            <ReactQuill value={this.state.text} onChange={this.handleChange} />
+            <Button variant="dark" type="submit" size="sm">
+              Submit
+            </Button>
+          </form>
+        </Container>
+        <br />
+        <Container>
+          <Outline outline={this.state.text} />
+        </Container>
       </div>
     );
   }

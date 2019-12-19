@@ -21,3 +21,15 @@ it("ds basic", () => {
     ["domesticated", 2]
   ]);
 });
+
+it("ds basic 2", () => {
+  let o = new OutlineDS(
+    "<h2>asdf</h2><h3>awef awef</h3><p>asdf <strong>efef</strong></p><h3>asdfawef</h3>"
+  );
+  expect(o.ds).toEqual([
+    ["asdf", 0],
+    ["awef awef", 1],
+    ["efef", 2],
+    ["asdfawef", 1]
+  ]);
+});
