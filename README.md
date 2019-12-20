@@ -9,7 +9,6 @@
 # Todo
 
 - Editor tests
-- Routes
 - Add questions which asks users to reorganize their notes and provide high level explanations
 
 # Works Cited
@@ -17,6 +16,7 @@
 - [TypeScript React examples](https://github.com/carlrip/LearnReact17WithTypeScript)
 - [React Quill Documentation](https://github.com/zenoamaro/react-quill#use-the-component)
 - [Structuring React apps](https://reactjs.org/docs/faq-structure.html)
+- [Mongoose Documentation](https://mongoosejs.com/docs/guides.html)
 
 # Completed
 
@@ -25,6 +25,7 @@
 - Add title to texts
 - Generating outline from text
 - Express server + mongo setup
+- Routes
 
 # Reminders
 

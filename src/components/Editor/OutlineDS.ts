@@ -4,32 +4,31 @@
  */
 export class OutlineSkeleton {
   title: string;
-  next: Set<OutlineSkeleton> | null; // remove because redundant
   outlines: Map<string, OutlineSkeleton>;
   prev?: OutlineSkeleton | null = null;
+  display = true;
 
   /**
    * Creates an instance of outline skeleton.
    * @param title - data for the linked list
    */
-  constructor(title: string, prev?: OutlineSkeleton) {
+  constructor(title: string, prev?: OutlineSkeleton, display?: boolean) {
     this.title = title;
-    this.next = new Set();
     this.outlines = new Map();
     this.prev = prev;
+    this.display = display || true; // If undefined, display is true.
   }
 
   /**
-   * Adds a next link
+   * Adds a next link, allows option of creating a filler link
    * @param n - new data
    * @returns added link
    */
-  addNext(n: string) {
+  addNext(n: string, display?: boolean) {
     if (this.outlines.has(n)) {
       return this.outlines.get(n);
     }
-    let future = new OutlineSkeleton(n, this);
-    this.next?.add(future);
+    let future = new OutlineSkeleton(n, this, display || true);
     this.outlines.set(n, future);
     return future;
   }
@@ -46,7 +45,7 @@ export class OutlineSkeleton {
           return false;
         }
       }); // What if o.nextStrs has more eles than this.nextStrs?
-      this.next?.forEach(ele => {
+      Array.from(this.outlines.values()).forEach(ele => {
         let corr = o.outlines.get(ele.title);
         if (corr) {
           if (!ele.equals(corr)) {
@@ -107,23 +106,27 @@ export class OutlineDS {
       this.ds.push([data, times]);
 
       if (times - prevLevel > 1) {
-        console.log("Must have placed an <h1> then a <strong>. Fix later!");
-      } else {
-        if (times - prevLevel < 1) {
-          for (let i = 0; i < prevLevel - times + 1; i++) {
-            if (curr.prev) {
-              curr = curr.prev;
-            } else {
-              console.log(
-                "Must have placed a <strong> then an <h1>. Fix later!"
-              );
-            }
+        // Like placing an <h1> then a <strong>
+        for (let i = 0; i < times - prevLevel - 1; i++) {
+          let filler = curr.addNext("", false);
+          if (filler) {
+            curr = filler;
           }
         }
-        let future = curr.addNext(data);
-        if (future) {
-          curr = future;
+      } else if (times - prevLevel < 1) {
+        for (let i = 0; i < prevLevel - times + 1; i++) {
+          if (curr.prev) {
+            curr = curr.prev;
+          } else {
+            // Like placing a <strong> then an <h1>
+            curr.prev = new OutlineSkeleton("", undefined, false);
+            curr = curr.prev;
+          }
         }
+      }
+      let future = curr.addNext(data);
+      if (future) {
+        curr = future;
       }
       prevLevel = times;
 
