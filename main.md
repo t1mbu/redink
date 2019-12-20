@@ -10,7 +10,6 @@
 
 - Editor tests
 - Routes
-- Express server + mongo setup
 - Add questions which asks users to reorganize their notes and provide high level explanations
 
 # Works Cited
@@ -25,6 +24,7 @@
 - Outline explanation
 - Add title to texts
 - Generating outline from text
+- Express server + mongo setup
 
 # Reminders
 

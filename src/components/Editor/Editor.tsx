@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Outline from "./Outline";
 import Container from "react-bootstrap/Container";
 import TextField from "@material-ui/core/TextField";
+import axios from "../Global/axios";
 
 interface IState {
   title: string;
@@ -13,17 +14,29 @@ interface IState {
 }
 
 class Editor extends Component<{}, IState> {
+  state = { title: "", text: "" };
+
   constructor(props: {}) {
     super(props);
-    this.state = { title: "", text: "" };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(value: string) {
     this.setState({ text: value });
   }
 
-  handleSubmit() {}
+  handleSubmit() {
+    axios
+      .post("/api/putnote", {
+        params: {
+          title: this.state.title,
+          text: this.state.text
+        }
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
 
   public render() {
     return (
