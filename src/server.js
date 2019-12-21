@@ -1,6 +1,11 @@
-var { user, pass } = require("./secret");
+var {
+  user,
+  pass
+} = require("./secret");
 var mongoose = require("mongoose");
-var Note = require("./models");
+var Note = require("./models/notes");
+var User = require("./models/users");
+var crypto = require("crypto");
 
 var conn = `mongodb+srv://${user}:${pass}@cluster0-pny6m.mongodb.net/test?retryWrites=true&w=majority`;
 const port = 5000;
@@ -28,7 +33,6 @@ app.listen(port, () => {
 router.post("/putnote", (req, res) => {
   var a = req.body.params.title,
     b = req.body.params.text;
-  console.log(`Created note with title ${a} and text ${b}`);
   var entry = new Note({
     title: a,
     text: b
@@ -38,4 +42,28 @@ router.post("/putnote", (req, res) => {
       res.send(err);
     }
   });
+  res.send(`Created note with title ${a} and text ${b}`);
+});
+
+var getHash = (salt, plain) => {
+  return crypto.pbkdf2Sync(plain, salt, 50000, 64, "sha256").toString("hex");
+};
+
+router.post("/newuser", (req, res) => {
+  var a = req.body.params.email,
+    b = req.body.params.password,
+    c = req.body.params.isTeacher;
+  var newSalt = crypto.randomBytes(20).toString("hex");
+  var entry = new User({
+    email: a,
+    salt: newSalt,
+    pass: getHash(newSalt, b),
+    isTeacher: c
+  });
+  entry.save(err => {
+    if (err) {
+      res.send(err);
+    }
+  });
+  res.send(`Created user with email ${a}, and isTeacher ${c}`);
 });

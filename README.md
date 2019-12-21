@@ -8,8 +8,9 @@
 
 # Todo
 
-- Editor tests
-- Add questions which asks users to reorganize their notes and provide high level explanations
+- Signup page edge cases (email already registered)
+- Add a user login page authentication + add authentication for most of the site
+- Add questions asked by teachers which asks users to reorganize their notes and provide high level explanations. Perhaps auto grader as well.
 
 # Works Cited
 
@@ -17,6 +18,7 @@
 - [React Quill Documentation](https://github.com/zenoamaro/react-quill#use-the-component)
 - [Structuring React apps](https://reactjs.org/docs/faq-structure.html)
 - [Mongoose Documentation](https://mongoosejs.com/docs/guides.html)
+- [Snapshot Tests](https://jestjs.io/docs/en/snapshot-testing)
 
 # Completed
 
@@ -26,6 +28,8 @@
 - Generating outline from text
 - Express server + mongo setup
 - Routes
+- Editor tests
+- Signup page linked securely with database
 
 # Reminders
 
