@@ -53,17 +53,49 @@ router.post("/newuser", (req, res) => {
   var a = req.body.params.email,
     b = req.body.params.password,
     c = req.body.params.isTeacher;
-  var newSalt = crypto.randomBytes(20).toString("hex");
-  var entry = new User({
-    email: a,
-    salt: newSalt,
-    pass: getHash(newSalt, b),
-    isTeacher: c
-  });
-  entry.save(err => {
+  User.findOne({
+    email: a
+  }, function (err, user) {
     if (err) {
       res.send(err);
+    } else if (user) {
+      res.send("Email already in use");
+    } else {
+      var newSalt = crypto.randomBytes(20).toString("hex");
+      var entry = new User({
+        email: a,
+        salt: newSalt,
+        pass: getHash(newSalt, b),
+        isTeacher: c
+      });
+      entry.save(err => {
+        if (err) {
+          res.send(err);
+        }
+      });
+      res.send(`Created user with email ${a}, and isTeacher ${c}`);
     }
   });
-  res.send(`Created user with email ${a}, and isTeacher ${c}`);
 });
+
+router.post("/authenticate", (req, res) => {
+  var a = req.body.params.email,
+    b = req.body.params.password;
+  console.log(`Attempting to authenticate with email ${a} and password ${b}`);
+  User.findOne({
+    email: a
+  }, function (err, user) {
+    if (err) {
+      res.send(err);
+    } else if (user) {
+      var check = getHash(user.salt, b);
+      if (check !== user.pass) {
+        res.send("Unauthenticated");
+      } else {
+        res.send("Authenticated");
+      }
+    } else {
+      res.send("User doesn't exist");
+    }
+  })
+})

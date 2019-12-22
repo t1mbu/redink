@@ -8,4 +8,5 @@ var UserSchema = new Schema({
   isTeacher: Boolean
 });
 
+
 module.exports = mongoose.model("User", UserSchema, "users");

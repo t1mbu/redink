@@ -8,7 +8,6 @@
 
 # Todo
 
-- Signup page edge cases (email already registered)
 - Add a user login page authentication + add authentication for most of the site
 - Add questions asked by teachers which asks users to reorganize their notes and provide high level explanations. Perhaps auto grader as well.
 
@@ -30,6 +29,7 @@
 - Routes
 - Editor tests
 - Signup page linked securely with database
+- Signup page edge cases (email already registered)
 
 # Reminders
 
